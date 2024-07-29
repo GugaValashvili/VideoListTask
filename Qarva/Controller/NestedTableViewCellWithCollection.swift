@@ -9,29 +9,29 @@ import Foundation
 import UIKit
 
 class NestedTableViewCellWithCollection: UITableViewCell  {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionLabel: UILabel!
     var models = [Model]()
-
+    
     static let identifier = "NestedTableViewCellWithCollection"
-
+    
     static func nib() -> UINib {
         return UINib(nibName: "NestedTableViewCellWithCollection", bundle: nil)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
     }
-
+    
     func configure(with models: [Model]) {
         self.models = models
         collectionView.reloadData()
     }
-   
+    
 }
 
 extension NestedTableViewCellWithCollection: UICollectionViewDelegate, UICollectionViewDataSource,

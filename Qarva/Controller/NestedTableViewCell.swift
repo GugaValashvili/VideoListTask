@@ -34,17 +34,13 @@ class NestedTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(customLabel)
-//        contentView.addSubview(customImageView)
-        
+        contentView.addSubview(customLabel)        
         NSLayoutConstraint.activate([
             customLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             customLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             customLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30)
         ])
         
-        
-        // Setup constraints for additional UI components if needed
     }
     
     func configure(with text: String) {

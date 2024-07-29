@@ -4,7 +4,7 @@ class Section {
     let title: String
     let options: [String]
     var isOpened = false
-
+    
     init(title: String, options: [String], isOpend: Bool = false) {
         self.title = title
         self.options = options
@@ -13,14 +13,14 @@ class Section {
 }
 
 class ViewController: UITableViewController  {
-   
+    
     
     
     // MARK: - Properties
     
     let reuseIdentifier = "VideoCell"
-//    let nestedCellIdentifier = "NestedCell"
-//    let collectionViewNib = MyCollectionViewCell.nib()
+    //    let nestedCellIdentifier = "NestedCell"
+    //    let collectionViewNib = MyCollectionViewCell.nib()
     let nestedCellIdentifier = "NestedTableViewCellWithCollection"
     
     @IBOutlet var collectionView: UICollectionView!
@@ -36,7 +36,7 @@ class ViewController: UITableViewController  {
             }
         }
     }
-
+    
     // MARK: - Lifecycle
     
     private var sections = [Section]()
@@ -56,19 +56,19 @@ class ViewController: UITableViewController  {
         tableView.backgroundColor = .white
         tableView.tableFooterView = UIView()
         tableView.register(NestedTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-//        tableView.register(NestedTableViewCell.self, forCellReuseIdentifier: nestedCellIdentifier)
+        //        tableView.register(NestedTableViewCell.self, forCellReuseIdentifier: nestedCellIdentifier)
         tableView.register(MyCollectionViewCell.nib(), forCellReuseIdentifier: MyCollectionViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        //        tableView.delegate = self
+        //        tableView.dataSource = self
     }
     // MARK: - CollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return models.count
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier , for: indexPath) as! MyCollectionViewCell
         cell.configure(with: models[indexPath.row])
@@ -91,51 +91,19 @@ class ViewController: UITableViewController  {
             cell?.configure(with: sections[indexPath.section].title)
             return cell ?? .init()
         } else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: nestedCellIdentifier, for: indexPath) as! NestedTableViewCell
-//            let option = sections[indexPath.section].options[indexPath.row - 1]
-//            cell.configure(with: option, imageName: "") // Adjust as needed
-//            cell.contentView.backgroundColor = .lightGray
-//            cell.indentationLevel = 1
-//            
-//            return cell
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: NestedTableViewCellWithCollection.identifier, for: indexPath) as! NestedTableViewCellWithCollection
-                        let options = sections[indexPath.section].options.map { Model(text: $0, imageName: "") }
+            let options = sections[indexPath.section].options.map { Model(text: $0, imageName: "") }
             
-                        cell.configure(with: options)
-//                        cell.contentView.backgroundColor = .lightGray
-                        return cell
+            cell.configure(with: options)
+            return cell
         }
     }
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-        
-//        if indexPath.row == 0 {
-//            sections[indexPath.section].isOpened.toggle()
-//            
-//            var indexPaths = [IndexPath]()
-//            for row in 1...sections[indexPath.section].options.count {
-//                indexPaths.append(IndexPath(row: row, section: indexPath.section))
-//            }
-//            
-//            if sections[indexPath.section].isOpened {
-//                tableView.insertRows(at: indexPaths, with: .fade)
-//            } else {
-//                tableView.deleteRows(at: indexPaths, with: .fade)
-//            }
-//        } else {
-//            print("Tapped sub cell")
-//        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             sections[indexPath.section].isOpened.toggle()
             let indexPaths = [IndexPath(row: 1, section: indexPath.section)]
-//            for row in 1...sections[indexPath.section].options.count {
-//                indexPaths.append(IndexPath(row: row, section: indexPath.section))
-//            }
             if sections[indexPath.section].isOpened {
                 tableView.insertRows(at: indexPaths, with: .fade)
             } else {

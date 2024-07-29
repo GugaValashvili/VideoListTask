@@ -11,7 +11,7 @@ class MyCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var myLabel: UILabel!
     @IBOutlet var myImageView: UIImageView!
-
+    
     static let identifier = "MyCollectionViewCell"
     
     static func nib() -> UINib {
@@ -25,7 +25,6 @@ class MyCollectionViewCell: UICollectionViewCell {
     
     public func configure(with model: Model) {
         self.myLabel.text = model.text
-//        self.myImageView.image = UIImage(named: "Logo") 
     }
-
+    
 }
